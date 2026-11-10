@@ -1,0 +1,45 @@
+name: Build iOS App (.ipa)
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build-ipa:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout Source
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Capacitor & Generate iOS Project
+        run: |
+          npm install
+          npx cap add ios
+          npx cap sync ios
+
+      - name: Build Unsigned .ipa with Xcode
+        run: |
+          cd ios/App
+          xcodebuild -project App.xcodeproj \
+            -scheme App \
+            -configuration Release \
+            -sdk iphoneos \
+            -derivedDataPath build \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO
+          mkdir -p Payload
+          cp -r build/Build/Products/Release-iphoneos/App.app Payload/
+          zip -r ../../MergeStudioPro.ipa Payload
+
+      - name: Upload Ready .ipa File
+        uses: actions/upload-artifact@v4
+        with:
+          name: MergeStudioPro-iOS-IPA
+          path: MergeStudioPro.ipa
