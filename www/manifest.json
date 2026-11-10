@@ -1,0 +1,24 @@
+{
+  "name": "Merge Studio Pro V3",
+  "short_name": "Merge Studio",
+  "description": "استوديو دمج الكرات الاحترافي V3 للآيفون",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#06080c",
+  "theme_color": "#06080c",
+  "icons": [
+    {
+      "src": "apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

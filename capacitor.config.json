@@ -1,0 +1,11 @@
+{
+  "appId": "com.mergestudio.pro",
+  "appName": "Merge Studio Pro",
+  "webDir": "www",
+  "bundledWebRuntime": false,
+  "ios": {
+    "contentInset": "always",
+    "backgroundColor": "#06080c",
+    "allowsLinkPreview": false
+  }
+}
